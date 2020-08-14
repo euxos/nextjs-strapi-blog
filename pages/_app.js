@@ -1,10 +1,12 @@
 import Header from 'components/Header/Header';
 import { ThemeProvider } from 'emotion-theming';
 import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
+import { ApolloProvider } from '@apollo/client';
+import client from './api/graphql';
 
 const theme = {
   colors: {
-    primary: '#ff3333'
+    primary: 'grey'
   }
 }
 
@@ -12,11 +14,15 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
 
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Header />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <Header />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
+        
+      
 
     </>
   )
